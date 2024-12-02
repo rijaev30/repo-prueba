@@ -1,0 +1,37 @@
+---
+title: "Prueba"
+format:
+  revealjs:
+    embed-resources: true
+editor: visual
+---
+
+##Carga de datos
+
+```{r}
+
+library(tidyverse)
+library(readr)
+accidentes <- read_csv("accidentes.csv")
+View(accidentes)
+```
+
+------------------------------------------------------------------------
+
+#Resumen de los datos. TRes guiones es cambio de diapositiva
+
+```{r}
+resumen <- accidentes |> count(sexo)
+```
+
+------------------------------------------------------------------------
+
+###visualizacion
+
+```{r}
+#| code-fold: true
+gg <-ggplot(resumen)+geom_col(aes(x=sexo,y=n,fill=sexo),alpha=0.56)+
+  ggthemes::scale_fill_colorblind()+
+  theme_minimal()
+plotly::ggplotly(gg)
+```
